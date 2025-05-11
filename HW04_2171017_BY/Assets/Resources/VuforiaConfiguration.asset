@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: 
-    ufoLicenseKey: QVVEUHBBei8vLy8vQUFBQUtJR3dpSGROVDBLUmhuS04wNGhhcitSZFZhT1ZpVzJYbWk2aGJKMVk4eEU4cmNFU2FZYjgza2ZkTVFqaGJEUkhUcFZtQU1DMzMxUFFZcnYyS3RvbjFBVUEvRkYrc2xTMk1xeHhiWUJmR3Vwbk5telplTDE3V0w3cHg0TUVSRmcxTFIwSS9XeE13TnJiQTBBR0tyUkFlL0krdVBEeUZMVFZRY2RHMXZnWFZ3cjBySFlFY2RPWVFLYnNSOUxBcXllWnU1Z3hibHE0ZGdjNVl1ZFdKRWhBWVZ4c29EeklXeDdCWlByS0Y3ZHNpTkt1c0Ntc3E5MnVmVEdyaHZJb1NqcHY2VjJFeEhHUmtXZmpvSUhCNUp3VFM4dVZ6Wjg3QVlWVVMzcmVvVnBUNTYrUGJJTWJ0MThxM2g2RlZONWIyYURzYlI1UnJHaThXRHpFZlZid2ZkblpydHNaU3h6bjBQUmpHL1FndHFyQVRtZE8=
+    ufoLicenseKey: QVh0clc2SC8vLy8vQUFBQUtPTUR4RFlCdUU0U2xuNHY2dVYrNkRFNGs0aG5mbDI2T3hrY09DalJHTkp0djBKUHA2UHlGRUFFS2p2N1RCY1Zwc2Vja0JYQ1NYSmMxRVR4YnIvRnpUSVRha3hOTHluNUZIUzBXcEkwWUxKMFIvcjhWSWxIbGpqeXFrakV1Ylo1OEQ1ckdOa0ptVDZWOCs1cVVvZmJUTXc2K050WWVBMnJheksycmM3cmZFRE82bFF6L1JJMkNDL2hLN1d2dFYvdkRXdFcwVEVkZHZvby9zUmYyRzlMVEJPOWNyM3JMZ0FMN1ZSK3NhWDRtaFFIRnRaWnEzQlBRMHJpd2g3RUExTlBjSVZqcWJEekNIK0d1WlRHc2ljTUVJOUh0V3k4MjhVYXlUWXBvVHpQSEJzNWU3bk9zZ2Q0aXZvT2x6YUNZamFTT1BjQmMyUDU2MHA5NlQvNkttczJkL1dycFFYYmltTlFoNjhHR1grMll3SWI=
     delayedInitialization: 0
     cameraFocusModeSetting: 2
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 1
+    maxSimultaneousImageTargets: 4
     virtualSceneScaleFactor: 1
     modelTargetRecoWhileExtendedTracked: 1
-    shareRecordingsInITunes: 0
+    shareRecordingsInITunes: 1
     logLevel: 0
-    version: 11.1.3
-    eulaAcceptedVersions: '{"Values":["","0.0","11.1"]}'
+    version: 10.19.0
+    eulaAcceptedVersions: '{"Values":[""]}'
   database:
-    disableModelExtraction: 0
+    disableModelExtraction: 1
   plugins:
     pluginDirectory: asset://Vuforia
   shaders:
@@ -48,8 +48,8 @@ MonoBehaviour:
     autoImportArcore: 1
     thirdPartyARCoreClientDetected: 0
   playmode:
-    mRecordingPath: 
-    playModeType: 0
+    mRecordingPath: Assets/SamplesResources/Recordings/area_target.mp4
+    playModeType: 2
   webcam:
     renderTextureLayer: 30
   packageInformation:
