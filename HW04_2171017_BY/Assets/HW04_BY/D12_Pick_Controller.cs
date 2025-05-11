@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Vuforia;
+
 
 public class D12_Pick_Controller : MonoBehaviour
 {
@@ -9,8 +11,16 @@ public class D12_Pick_Controller : MonoBehaviour
     public GameObject Container;
     public GameObject UI_Controller;
 
+    private TrackableBehaviour mTrackableBehaviour;
+
     private void Start()
     {
+        mTrackableBehaviour = GetComponent<TrackableBehaviour>();
+        if (mTrackableBehaviour)
+        {
+            mTrackableBehaviour.RegisterOnTrackableEventHandler(this);
+        }
+
         Container.SetActive(false);
     }
 
@@ -24,6 +34,24 @@ public class D12_Pick_Controller : MonoBehaviour
         else
         {
             print("out of pick area");
+        }
+    }
+
+    private void OnTrackableStateChanged(
+        TrackableBehaviour.Status previousStatus,
+        TrackableBehaviour.Status newStatus)
+    {
+        if (newStatus == TrackableBehaviour.Status.DETECTED ||
+            newStatus == TrackableBehaviour.Status.TRACKED ||
+            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+        {
+            // Target found
+            Container.SetActive(true);
+        }
+        else
+        {
+            // Target lost
+            Container.SetActive(false);
         }
     }
 
