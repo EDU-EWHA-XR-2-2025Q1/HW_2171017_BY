@@ -11,14 +11,14 @@ public class D12_Pick_Controller : MonoBehaviour
     public GameObject Container;
     public GameObject UI_Controller;
 
-    private TrackableBehaviour mTrackableBehaviour;
+    private ObserverBehaviour mObserverBehaviour;
 
     private void Start()
     {
-        mTrackableBehaviour = GetComponent<TrackableBehaviour>();
-        if (mTrackableBehaviour)
+        mObserverBehaviour = GetComponent<ObserverBehaviour>();
+        if (mObserverBehaviour)
         {
-            mTrackableBehaviour.RegisterOnTrackableEventHandler(this);
+            mObserverBehaviour.OnTargetStatusChanged += OnTargetStatusChanged;
         }
 
         Container.SetActive(false);
@@ -26,35 +26,21 @@ public class D12_Pick_Controller : MonoBehaviour
 
     public void OnHeartClicked(GameObject Heart)
     {
-        if (targetShowed)
-        {
-            UI_Controller.GetComponent<D12_UI_Controller>().Increase_PickCounter();
-            Destroy(Heart);
-        }
-        else
-        {
-            print("out of pick area");
-        }
+        UI_Controller.GetComponent<D12_UI_Controller>().Increase_PickCounter();
+        Destroy(Heart);
     }
 
-    private void OnTrackableStateChanged(
-        TrackableBehaviour.Status previousStatus,
-        TrackableBehaviour.Status newStatus)
+    private void OnTargetStatusChanged(ObserverBehaviour behaviour, TargetStatus targetStatus)
     {
-        if (newStatus == TrackableBehaviour.Status.DETECTED ||
-            newStatus == TrackableBehaviour.Status.TRACKED ||
-            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
+        Debug.Log("Target status: " + behaviour.TargetName + " " + targetStatus.Status);
+
+        if (targetStatus.Status == Status.EXTENDED_TRACKED || targetStatus.Status == Status.TRACKED)
         {
-            // Target found
+            targetShowed = true;
             Container.SetActive(true);
         }
-        else
-        {
-            // Target lost
-            Container.SetActive(false);
-        }
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "FPSController")
@@ -71,5 +57,8 @@ public class D12_Pick_Controller : MonoBehaviour
             targetShowed = false;
             Container.SetActive(false);
         }
-    }
+    }*/
 }
+
+
+
