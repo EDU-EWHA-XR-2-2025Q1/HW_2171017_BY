@@ -1,37 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
 public class D12_Put_Controller : MonoBehaviour
 {
     bool isInTheArea;
-    public GameObject Bowl;
-    public GameObject TargetObjectToClone;
-    public Transform PlayerCamera;
+    public GameObject BowlContainer;
+    // public GameObject TargetObjectToClone;
+    // public Transform PlayerCamera;
     public GameObject UI_Controller;
+    public GameObject Bowl;
+
+    private ObserverBehaviour mObserverBehaviour;
+    private float timer = 0f;
+    private float interval = 1f;
+    private int[] possibleXPositions = { -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+
 
     void Start()
     {
-        Bowl.SetActive(false);
+        mObserverBehaviour = GetComponent<ObserverBehaviour>();
+        if (mObserverBehaviour)
+        {
+            mObserverBehaviour.OnTargetStatusChanged += OnTargetStatusChanged;
+        }
+
+        BowlContainer.SetActive(false);
+    }
+
+
+    private void OnTargetStatusChanged(ObserverBehaviour behaviour, TargetStatus targetStatus)
+    {
+        Debug.Log("Target status: " + behaviour.TargetName + " " + targetStatus.Status);
+
+        if (targetStatus.Status == Status.EXTENDED_TRACKED || targetStatus.Status == Status.TRACKED)
+        {
+            BowlContainer.SetActive(true);
+            Bowl.SetActive(true);
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isInTheArea)
+        if(BowlContainer.activeSelf)
         {
-            D12_UI_Controller UI_Script = UI_Controller.GetComponent<D12_UI_Controller>();
-            int heartsPicked = UI_Script.GetPickCounts();
-            if (heartsPicked > 0)
+            timer += Time.deltaTime;
+            
+            if (timer >= interval)
             {
-                ThrowHeart();
-            }
-            else
-            {
-                print("collect more hearts");
+                timer = 0f;
+
+                // 랜덤한 X 좌표 선택
+                int randomX = possibleXPositions[Random.Range(0, possibleXPositions.Length)];
+
+                // 기존 위치 유지하면서 X만 변경
+                Vector3 currentPos = Bowl.transform.position;
+                Bowl.transform.position = new Vector3(randomX, currentPos.y, currentPos.z);
             }
         }
     }
 
+
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "FPSController")
@@ -49,7 +81,8 @@ public class D12_Put_Controller : MonoBehaviour
             Bowl.SetActive(false);
         }
     }
-
+    */
+    /*
     void ThrowHeart()
     {
         // UI의 heart 개수 감소
@@ -70,5 +103,5 @@ public class D12_Put_Controller : MonoBehaviour
 
         // 카메라 방향으로 힘을 주어 던지기
         Clone.GetComponent<Rigidbody>().AddForce(PlayerCamera.forward * 400f);
-    }
+    }*/
 }

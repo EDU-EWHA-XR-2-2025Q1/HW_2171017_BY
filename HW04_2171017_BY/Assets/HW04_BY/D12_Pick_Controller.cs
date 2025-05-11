@@ -7,7 +7,7 @@ using Vuforia;
 
 public class D12_Pick_Controller : MonoBehaviour
 {
-    bool targetShowed = false;
+    // bool targetShowed = false;
     public GameObject Container;
     public GameObject UI_Controller;
 
@@ -36,7 +36,7 @@ public class D12_Pick_Controller : MonoBehaviour
 
         if (targetStatus.Status == Status.EXTENDED_TRACKED || targetStatus.Status == Status.TRACKED)
         {
-            targetShowed = true;
+            // targetShowed = true;
             Container.SetActive(true);
         }
     }
