@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Vuforia;
 
 public class D12_Put_Controller : MonoBehaviour
 {
     bool isInTheArea;
     public GameObject BowlContainer;
-    // public GameObject TargetObjectToClone;
-    // public Transform PlayerCamera;
+    public GameObject TargetObjectToClone;
+    public Transform PlayerCamera;
     public GameObject UI_Controller;
     public GameObject Bowl;
+
+    public GameObject GuideText;
+    public GameObject AimPoint;
+    public GameObject FireButton;
 
     private ObserverBehaviour mObserverBehaviour;
     private float timer = 0f;
@@ -38,15 +43,28 @@ public class D12_Put_Controller : MonoBehaviour
         {
             BowlContainer.SetActive(true);
             Bowl.SetActive(true);
+            GuideText.SetActive(false);
+            AimPoint.SetActive(true);
+            FireButton.SetActive(true);
         }
     }
 
     void Update()
     {
-        if(BowlContainer.activeSelf)
+        Button fireBtn = FireButton.GetComponent<Button>();
+        if (D12_UI_Controller.pickCounter <= 0)
+        {
+            fireBtn.interactable = false;
+        }
+        else
+        {
+            fireBtn.interactable = true;
+        }
+
+        if (BowlContainer.activeSelf)
         {
             timer += Time.deltaTime;
-            
+
             if (timer >= interval)
             {
                 timer = 0f;
@@ -61,29 +79,7 @@ public class D12_Put_Controller : MonoBehaviour
         }
     }
 
-
-
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "FPSController")
-        {
-            isInTheArea = true;
-            Bowl.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "FPSController")
-        {
-            isInTheArea = false;
-            Bowl.SetActive(false);
-        }
-    }
-    */
-    /*
-    void ThrowHeart()
+    public void ThrowHeart()
     {
         // UI의 heart 개수 감소
         UI_Controller.GetComponent<D12_UI_Controller>().Decrease_PickCounter();
@@ -101,7 +97,8 @@ public class D12_Put_Controller : MonoBehaviour
         // Rigidbody 설정: useGravity를 true로 하여 물리적 영향 받도록
         Clone.GetComponent<Rigidbody>().useGravity = true;
 
-        // 카메라 방향으로 힘을 주어 던지기
-        Clone.GetComponent<Rigidbody>().AddForce(PlayerCamera.forward * 400f);
-    }*/
+        // 카메라 방향 + 위쪽으로 힘을 주어 던지기
+        Vector3 throwDirection = PlayerCamera.forward + PlayerCamera.up * 0.5f;
+        Clone.GetComponent<Rigidbody>().AddForce(throwDirection.normalized * 400f);
+    }
 }
