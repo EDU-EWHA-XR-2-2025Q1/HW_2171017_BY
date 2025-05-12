@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class D12_Heart_Instantiator : MonoBehaviour
 {
-    int cloneCount = 10 - D12_UI_Controller.pickCounter;
     public GameObject TargetObjectToClone;
 
     void Start()
@@ -14,7 +13,7 @@ public class D12_Heart_Instantiator : MonoBehaviour
 
     public void InstantiateHearts()
     {
-        for(int i = 0; i < cloneCount; i++)
+        for(int i = 0; i < D12_UI_Controller.cloneCount; i++)
         {
             // Set Random Position
             Vector3 randomSphere = Random.insideUnitSphere * 5;
