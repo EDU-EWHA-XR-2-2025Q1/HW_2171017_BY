@@ -7,9 +7,10 @@ using Vuforia;
 
 public class D12_Pick_Controller : MonoBehaviour
 {
-    // bool targetShowed = false;
     public GameObject Container;
     public GameObject UI_Controller;
+
+    public GameObject GuideText;
 
     private ObserverBehaviour mObserverBehaviour;
 
@@ -36,28 +37,10 @@ public class D12_Pick_Controller : MonoBehaviour
 
         if (targetStatus.Status == Status.EXTENDED_TRACKED || targetStatus.Status == Status.TRACKED)
         {
-            // targetShowed = true;
             Container.SetActive(true);
+            GuideText.SetActive(false);
         }
     }
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "FPSController")
-        {
-            targetShowed = true;
-            Container.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "FPSController")
-        {
-            targetShowed = false;
-            Container.SetActive(false);
-        }
-    }*/
 }
 
 

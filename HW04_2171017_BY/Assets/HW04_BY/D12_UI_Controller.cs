@@ -6,9 +6,9 @@ using TMPro;
 
 public class D12_UI_Controller : MonoBehaviour
 {
-    public GameObject RetryButton;
     public TMP_Text Heart_PickCounts, Heart_PutCounts;
     public static int pickCounter, putCounter;
+    public static int cloneCount = 10;
 
     void Start()
     {
@@ -21,6 +21,7 @@ public class D12_UI_Controller : MonoBehaviour
         // 현재 카운터 초기화
         pickCounter = 0;
         putCounter = 0;
+        cloneCount = 10;
 
         // 현재 활성화된 씬을 다시 불러오기
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -30,6 +31,7 @@ public class D12_UI_Controller : MonoBehaviour
     {
         print($"increase pickCounter");
         pickCounter ++;
+        cloneCount--;
         Heart_PickCounts.text = pickCounter.ToString();
     }
 
