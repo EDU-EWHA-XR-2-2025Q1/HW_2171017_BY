@@ -24,9 +24,19 @@ UserSettings/
 *.VC.db
 .vscode/
 .vs/
+*.log
+*.uo
+*.tgz
 
 # Mac OS
 .DS_Store
 
 # Windows
 Thumbs.db
+
+# Vuforia Core Samples 전체 무시
+HW04_2171017_BY/Assets/SamplesResources/
+
+# 예외적으로 필요한 파일 다시 포함
+!HW04_2171017_BY/Assets/Editor/Vuforia/ForPrint/
+!HW04_2171017_BY/Assets/HW04_BY/
